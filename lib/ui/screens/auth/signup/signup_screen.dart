@@ -1,371 +1,393 @@
 import 'package:fitness_app/core/constant/auth_decoration.dart';
 import 'package:fitness_app/core/constant/colors.dart';
 import 'package:fitness_app/core/constant/strings.dart';
+import 'package:fitness_app/ui/screens/auth/signup/signup_screen_model.dart';
 import 'package:fitness_app/ui/screens/root/root_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
-  @override
-  State<SignupScreen> createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen> {
-  final _Globalloginkey = GlobalKey<FormState>();
-  final _Globalsignupkey = GlobalKey<FormState>();
+  // final _Globalloginkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/static_assets/signupBg.png"),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Center(
-            child: Container(
-              margin: EdgeInsets.only(top: 100, left: 10, right: 10),
-              height: 443,
-              width: 353,
-
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: Colors.white,
+    return ChangeNotifierProvider(
+      create: (context) => SignupScreenModel(),
+      child : Consumer<SignupScreenModel>(builder: (context, model, child) =>
+       DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/static_assets/signupBg.png"),
+                fit: BoxFit.cover,
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 16,
+            ),
+            child: Center(
+              child: Container(
+                margin: EdgeInsets.only(top: 100, left: 10, right: 10),
+                height: 443,
+                width: 353,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.white,
                 ),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 16,
+                  ),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
 
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        gradient: primary,
+                    children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          gradient: primary,
+                        ),
+                        child: Image.asset(
+                          "assets/Icons_assets/logo.png",
+                          scale: 4,
+                        ),
                       ),
-                      child: Image.asset(
-                        "assets/Icons_assets/logo.png",
-                        scale: 4,
+                      SizedBox(height: 2),
+                      Container(
+                        margin: EdgeInsets.only(left: 80, right: 80),
+                        child: TabBar(
+                          labelColor: pinkColor,
+                          // indicator: UnderlineTabIndicator(
+                          //   borderSide: BorderSide(width: 3 , color: pinkColor),
+                          //   insets: EdgeInsets.symmetric(horizontal: 30)
+                          // ),
+                          unselectedLabelColor: Color(0xff909090),
+                          indicatorColor: pinkColor,
+                          indicatorWeight: 2,
+                          // indicatorPadding: EdgeInsets.only(left:   ,right: 10),
+                          indicatorSize: TabBarIndicatorSize.tab,
+
+                          tabs: [
+                            Tab(text: "Login"),
+                            Tab(text: "Signup"),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 2),
-                    Container(
-                      margin: EdgeInsets.only(left: 80, right: 80),
-                      child: TabBar(
-                        labelColor: pinkColor,
-                        // indicator: UnderlineTabIndicator(
-                        //   borderSide: BorderSide(width: 3 , color: pinkColor),
-                        //   insets: EdgeInsets.symmetric(horizontal: 30)
-                        // ),
-                        unselectedLabelColor: Color(0xff909090),
-                        indicatorColor: pinkColor,
-                        indicatorWeight: 2,
-                        // indicatorPadding: EdgeInsets.only(left:   ,right: 10),
-                        indicatorSize: TabBarIndicatorSize.tab,
+                      SizedBox(height: 20),
+                      Expanded(
+                        child: TabBarView(
+                          children: [
+                            Form(
+                              key: model.Globalloginkey,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      width: 297,
+                                      height: 50,
 
-                        tabs: [
-                          Tab(text: "Login"),
-                          Tab(text: "Signup"),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Expanded(
-                      child: TabBarView(
-                        children: [
-                          Form(
-                            key: _Globalloginkey,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width: 297,
-                                    height: 42,
+                                      decoration: BoxDecoration(
+                                        // boxShadow: [
+                                        //   BoxShadow(
+                                        //     color: Color(0xff98989840),
+                                        //     blurRadius: 8,
+                                        //     spreadRadius: 0,
+                                        //     offset: Offset(-2, 4),
+                                        //   ),
+                                        // ],
+                                      ),
+                                      child: TextFormField(
+                                        validator: model.usernamevalidator,
 
-                                    decoration: BoxDecoration(
-                                      // boxShadow: [
-                                      //   BoxShadow(
-                                      //     color: Color(0xff98989840),
-                                      //     blurRadius: 8,
-                                      //     spreadRadius: 0,
-                                      //     offset: Offset(-2, 4),
-                                      //   ),
-                                      // ],
-                                    ),
-                                    child: TextFormField(
-                                      validator: (value) {
-                                        if (value!.isEmpty || value == null) {
-                                          return "please enter your Username";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
+                                        // validator: (value) {
+                                        //   if (value!.isEmpty || value == null) {
+                                        //     return "please enter your Username";
+                                        //   } else {
+                                        //     return null;
+                                        //   }
+                                        // },
 
-                                      decoration: authInputDecoration,
-                                    ),
-                                  ),
-                                ),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Container(
-                                    width: 297,
-                                    height: 42,
-
-                                    decoration: BoxDecoration(
-                                      // boxShadow: [
-                                      //   BoxShadow(
-                                      //     color: Color(0xff98989840),
-                                      //     blurRadius: 8,
-                                      //     spreadRadius: 0,
-                                      //     offset: Offset(-2, 4),
-                                      //   ),
-                                      // ],
-                                    ),
-                                    child: TextFormField(
-                                      validator: (value) {
-                                        if (value!.isEmpty || value == null) {
-                                          return "please enter your password";
-                                        } else if (value.length <= 7) {
-                                          return "your password should be atleast 8 character";
-                                        } else {
-                                          return null;
-                                        }
-                                      },
-                                      decoration: authInputDecoration.copyWith(
-                                        hintText: "Password",
+                                        decoration: authInputDecoration,
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  alignment: Alignment.topRight,
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "forgot Password?",
-                                      style: TextStyle(color: pinkColor),
-                                    ),
-                                  ),
-                                ),
 
-                                InkWell(
-                                  onTap: () {
-                                    if (_Globalloginkey.currentState!
-                                        .validate()) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => RootScreen(),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Container(
+                                      width: 297,
+                                      height: 50,
+
+                                      decoration: BoxDecoration(
+                                        // boxShadow: [
+                                        //   BoxShadow(
+                                        //     color: Color(0xff98989840),
+                                        //     blurRadius: 8,
+                                        //     spreadRadius: 0,
+                                        //     offset: Offset(-2, 4),
+                                        //   ),
+                                        // ],
+                                      ),
+                                      child: TextFormField(
+
+                                        validator: model.passwordvalidator,
+
+                                        // validator: (value) {
+                                        //   if (value!.isEmpty || value == null) {
+                                        //     return "please enter your password";
+                                        //   } else if (value.length <= 7) {
+                                        //     return "your password should be atleast 8 character";
+                                        //   } else {
+                                        //     return null;
+                                        //   }
+                                        // },
+                                        decoration: authInputDecoration.copyWith(
+                                          hintText: "Password",
                                         ),
-                                      );
-                                    }
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 297,
-                                    height: 42,
-                                    decoration: BoxDecoration(
-                                      gradient: primary,
-                                    ),
-                                    child: Text(
-                                      "login",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: whiteColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("Don't have an account? "),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => signup(),),);
-                                        },
-                                        child: Text(
-                                          "Signup",
-                                          style: TextStyle(color: pinkColor),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Form(
-                            key: _Globalsignupkey,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width: 297,
-                                    height: 42,
-
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: whiteColor,
-                                          blurRadius: 8,
-                                          spreadRadius: 0,
-                                          offset: Offset(-2, 4),
-                                        ),
-                                      ],
-                                    ),
-                                    child: TextFormField(
-                                      validator: (value){
-                                        if(value!.isEmpty || value == null){
-                                          return "please enter your username";
-                                        }
-                                        else{
-                                          return null;
-                                        }
-                                      },
-                                      decoration: authInputDecoration,
-                                    ),
-                                  ),
-                                ),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Container(
-                                    width: 297,
-                                    height: 42,
-
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: whiteColor,
-                                          blurRadius: 8,
-                                          spreadRadius: 0,
-                                          offset: Offset(-2, 4),
-                                        ),
-                                      ],
-                                    ),
-                                    child: TextFormField(
-                                      validator: (value ){
-                                        if(value!.isEmpty || value == null ){
-                                          return " please enter your email" ;
-                                        }
-                                        else{
-                                          return null ;
-                                        }
-                                      },
-                                      decoration: authInputDecoration.copyWith(
-                                        hintText: "Email",
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Container(
-                                    width: 297,
-                                    height: 42,
-
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.white,
-                                          blurRadius: 0,
-                                          spreadRadius: 0,
-                                          offset: Offset(-2, 4),
-                                        ),
-                                      ],
-                                    ),
-                                    child: TextFormField(
-                                      validator: (value){
-                                        if(value!.isEmpty || value==null){
-                                          return "please enter your password";
-
-                                        }
-                                        else if (value!.length <= 7){
-                                          return "enter atleast 8 character";
-                                        }
-                                        else{
-                                          return null;
-                                        }
-                                      },
-                                      decoration: authInputDecoration.copyWith(
-                                        hintText: "Password",
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-
-                                InkWell(
-                                  onTap:(){
-                                    if(_Globalsignupkey.currentState!.validate()){
-
-                                    }
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 297,
-                                    height: 42,
-                                    decoration: BoxDecoration(gradient: primary),
-
+                                  Container(
+                                    alignment: Alignment.topRight,
+                                    child: TextButton(
+                                      onPressed: () {},
                                       child: Text(
-                                        "Signup",
+                                        "forgot Password?",
+                                        style: TextStyle(color: pinkColor),
+                                      ),
+                                    ),
+                                  ),
+
+                                  InkWell(
+                                    onTap: () {
+                                      // if (_Globalloginkey.currentState!
+                                      //     .validate()) {
+
+
+                                      if(model.Login())
+
+                                        {
+                                          Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => RootScreen(),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: 297,
+                                      height: 42,
+                                      decoration: BoxDecoration(
+                                        gradient: primary,
+                                      ),
+                                      child: Text(
+                                        "login",
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: whiteColor,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
-
+                                    ),
                                   ),
-                                ),
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("Don't have an account? "),
+                                        TextButton(
+                                          onPressed: () {
+                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => signup(),),);
+                                          },
+                                          child: Text(
+                                            "Signup",
+                                            style: TextStyle(color: pinkColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Form(
+                              key: model.Globalsignupkey,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      width: 297,
+                                      height: 42,
+
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: whiteColor,
+                                            blurRadius: 8,
+                                            spreadRadius: 0,
+                                            offset: Offset(-2, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+
+                                        validator: model.usernamevalidator,
+
+                                        // validator: (value){
+                                        //   if(value!.isEmpty || value == null){
+                                        //     return "please enter your username";
+                                        //   }
+                                        //   else{
+                                        //     return null;
+                                        //   }
+                                        // },
+                                        decoration: authInputDecoration,
+                                      ),
+                                    ),
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Container(
+                                      width: 297,
+                                      height: 42,
+
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: whiteColor,
+                                            blurRadius: 8,
+                                            spreadRadius: 0,
+                                            offset: Offset(-2, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+
+                                        validator: model.emailvalidator,
 
 
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("Already have an account? "),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => login(),));
-                                        },
-                                        child: Text(
-                                          "Login",
-                                          style: TextStyle(color: pinkColor),
+                                        // validator: (value ){
+                                        //   if(value!.isEmpty || value == null ){
+                                        //     return " please enter your email" ;
+                                        //   }
+                                        //   else{
+                                        //     return null ;
+                                        //   }
+                                        // },
+                                        decoration: authInputDecoration.copyWith(
+                                          hintText: "Email",
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Container(
+                                      width: 297,
+                                      height: 42,
+
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.white,
+                                            blurRadius: 0,
+                                            spreadRadius: 0,
+                                            offset: Offset(-2, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+                                        validator: model.passwordvalidator,
+
+
+                                        // validator: (value){
+                                        //   if(value!.isEmpty || value==null){
+                                        //     return "please enter your password";
+                                        //
+                                        //   }
+                                        //   else if (value!.length <= 7){
+                                        //     return "enter atleast 8 character";
+                                        //   }
+                                        //   else{
+                                        //     return null;
+                                        //   }
+                                        // },
+                                        decoration: authInputDecoration.copyWith(
+                                          hintText: "Password",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+
+                                  InkWell(
+                                    onTap:(){
+
+                                      if(model.Signup()){
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupScreen(),));
+                                      }
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: 297,
+                                      height: 42,
+                                      decoration: BoxDecoration(gradient: primary),
+
+                                        child: Text(
+                                          "Signup",
+                                          style: TextStyle(
+                                            color: whiteColor,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+
+                                    ),
+                                  ),
+
+
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("Already have an account? "),
+                                        TextButton(
+                                          onPressed: () {
+                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => login(),));
+                                          },
+                                          child: Text(
+                                            "Login",
+                                            style: TextStyle(color: pinkColor),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
+      ),
       ),
     );
   }
