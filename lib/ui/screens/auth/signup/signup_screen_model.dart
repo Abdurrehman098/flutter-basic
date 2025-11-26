@@ -1,8 +1,11 @@
 
 
+import 'package:fitness_app/core/models/base_view_model.dart';
 import 'package:flutter/material.dart';
 
-class SignupScreenModel extends ChangeNotifier{
+class SignupScreenModel extends BaseViewModel{
+
+
   final Globalloginkey = GlobalKey<FormState>();
   final Globalsignupkey = GlobalKey<FormState>();
 
@@ -51,3 +54,5 @@ class SignupScreenModel extends ChangeNotifier{
 
 
 }
+
+

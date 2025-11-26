@@ -1,6 +1,7 @@
 import 'package:fitness_app/core/constant/auth_decoration.dart';
 import 'package:fitness_app/core/constant/colors.dart';
 import 'package:fitness_app/core/constant/strings.dart';
+import 'package:fitness_app/core/enums/enums.dart';
 import 'package:fitness_app/ui/screens/auth/signup/signup_screen_model.dart';
 import 'package:fitness_app/ui/screens/root/root_screen.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +166,7 @@ class SignupScreen extends StatelessWidget {
                                   ),
 
                                   InkWell(
-                                    onTap: () {
+                                    onTap: () async{
                                       // if (_Globalloginkey.currentState!
                                       //     .validate()) {
 
@@ -173,12 +174,15 @@ class SignupScreen extends StatelessWidget {
                                       if(model.Login())
 
                                         {
+                                          model.setState(ViewState.busy);
+                                          await Future.delayed(Duration(seconds: 5));
                                           Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => RootScreen(),
                                           ),
                                         );
+                                          model.setState(ViewState.idle);
                                       }
                                     },
                                     child: Container(
@@ -188,7 +192,8 @@ class SignupScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         gradient: primary,
                                       ),
-                                      child: Text(
+                                      child:model.state==ViewState.busy ? CircularProgressIndicator():
+                                      Text(
                                         "login",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
