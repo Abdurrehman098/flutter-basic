@@ -26,7 +26,7 @@ class _splashscreenState extends State<splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.asset("$staticAssets/splashScreen.png"),
+      body: Image.asset("$staticAssets/splashScreen.png" , width: double.infinity,height: double.infinity,)
 
     ) ;
   }

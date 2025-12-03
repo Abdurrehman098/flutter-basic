@@ -29,7 +29,7 @@ class SignupScreen extends StatelessWidget {
             child: Center(
               child: Container(
                 margin: EdgeInsets.only(top: 100, left: 10, right: 10),
-                height: 443,
+                height: 430,
                 width: 353,
 
                 decoration: BoxDecoration(
@@ -54,7 +54,7 @@ class SignupScreen extends StatelessWidget {
                           gradient: primary,
                         ),
                         child: Image.asset(
-                          "assets/Icons_assets/logo.png",
+                          "$iconsAssets/logo.png",
                           scale: 4,
                         ),
                       ),
@@ -79,307 +79,285 @@ class SignupScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 15),
                       Expanded(
                         child: TabBarView(
                           children: [
                             Form(
                               key: model.Globalloginkey,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: 297,
-                                      height: 50,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      validator: model.usernamevalidator,
 
-                                      decoration: BoxDecoration(
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //     color: Color(0xff98989840),
-                                        //     blurRadius: 8,
-                                        //     spreadRadius: 0,
-                                        //     offset: Offset(-2, 4),
-                                        //   ),
-                                        // ],
-                                      ),
-                                      child: TextFormField(
-                                        validator: model.usernamevalidator,
+                                      // validator: (value) {
+                                      //   if (value!.isEmpty || value == null) {
+                                      //     return "please enter your Username";
+                                      //   } else {
+                                      //     return null;
+                                      //   }
+                                      // },
 
-                                        // validator: (value) {
-                                        //   if (value!.isEmpty || value == null) {
-                                        //     return "please enter your Username";
-                                        //   } else {
-                                        //     return null;
-                                        //   }
-                                        // },
+                                      decoration: authInputDecoration,
+                                    ),
+                                    SizedBox(height: 10,),
+                                
+                                    TextFormField(
 
-                                        decoration: authInputDecoration,
+
+                                      validator: model.passwordvalidator,
+
+                                      // validator: (value) {
+                                      //   if (value!.isEmpty || value == null) {
+                                      //     return "please enter your password";
+                                      //   } else if (value.length <= 7) {
+                                      //     return "your password should be atleast 8 character";
+                                      //   } else {
+                                      //     return null;
+                                      //   }
+                                      // },
+                                      decoration: authInputDecoration.copyWith(
+                                        hintText: "Password",
                                       ),
                                     ),
-                                  ),
-
-                                  Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Container(
-                                      width: 297,
-                                      height: 50,
-
-                                      decoration: BoxDecoration(
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //     color: Color(0xff98989840),
-                                        //     blurRadius: 8,
-                                        //     spreadRadius: 0,
-                                        //     offset: Offset(-2, 4),
-                                        //   ),
-                                        // ],
-                                      ),
-                                      child: TextFormField(
-
-                                        validator: model.passwordvalidator,
-
-                                        // validator: (value) {
-                                        //   if (value!.isEmpty || value == null) {
-                                        //     return "please enter your password";
-                                        //   } else if (value.length <= 7) {
-                                        //     return "your password should be atleast 8 character";
-                                        //   } else {
-                                        //     return null;
-                                        //   }
-                                        // },
-                                        decoration: authInputDecoration.copyWith(
-                                          hintText: "Password",
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.topRight,
-                                    child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        "forgot Password?",
-                                        style: TextStyle(color: pinkColor),
-                                      ),
-                                    ),
-                                  ),
-
-                                  InkWell(
-                                    onTap: () async{
-                                      // if (_Globalloginkey.currentState!
-                                      //     .validate()) {
-
-
-                                      if(model.Login())
-
-                                        {
-                                          model.setState(ViewState.busy);
-                                          await Future.delayed(Duration(seconds: 5));
-                                          Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => RootScreen(),
-                                          ),
-                                        );
-                                          model.setState(ViewState.idle);
-                                      }
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: 297,
-                                      height: 42,
-                                      decoration: BoxDecoration(
-                                        gradient: primary,
-                                      ),
-                                      child:model.state==ViewState.busy ? CircularProgressIndicator():
-                                      Text(
-                                        "login",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: whiteColor,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text("Don't have an account? "),
-                                        TextButton(
-                                          onPressed: () {
-                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => signup(),),);
-                                          },
-                                          child: Text(
-                                            "Signup",
-                                            style: TextStyle(color: pinkColor),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Form(
-                              key: model.Globalsignupkey,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: 297,
-                                      height: 42,
-
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: whiteColor,
-                                            blurRadius: 8,
-                                            spreadRadius: 0,
-                                            offset: Offset(-2, 4),
-                                          ),
-                                        ],
-                                      ),
-                                      child: TextFormField(
-
-                                        validator: model.usernamevalidator,
-
-                                        // validator: (value){
-                                        //   if(value!.isEmpty || value == null){
-                                        //     return "please enter your username";
-                                        //   }
-                                        //   else{
-                                        //     return null;
-                                        //   }
-                                        // },
-                                        decoration: authInputDecoration,
-                                      ),
-                                    ),
-                                  ),
-
-                                  Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Container(
-                                      width: 297,
-                                      height: 42,
-
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: whiteColor,
-                                            blurRadius: 8,
-                                            spreadRadius: 0,
-                                            offset: Offset(-2, 4),
-                                          ),
-                                        ],
-                                      ),
-                                      child: TextFormField(
-
-                                        validator: model.emailvalidator,
-
-
-                                        // validator: (value ){
-                                        //   if(value!.isEmpty || value == null ){
-                                        //     return " please enter your email" ;
-                                        //   }
-                                        //   else{
-                                        //     return null ;
-                                        //   }
-                                        // },
-                                        decoration: authInputDecoration.copyWith(
-                                          hintText: "Email",
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Container(
-                                      width: 297,
-                                      height: 42,
-
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.white,
-                                            blurRadius: 0,
-                                            spreadRadius: 0,
-                                            offset: Offset(-2, 4),
-                                          ),
-                                        ],
-                                      ),
-                                      child: TextFormField(
-                                        validator: model.passwordvalidator,
-
-
-                                        // validator: (value){
-                                        //   if(value!.isEmpty || value==null){
-                                        //     return "please enter your password";
-                                        //
-                                        //   }
-                                        //   else if (value!.length <= 7){
-                                        //     return "enter atleast 8 character";
-                                        //   }
-                                        //   else{
-                                        //     return null;
-                                        //   }
-                                        // },
-                                        decoration: authInputDecoration.copyWith(
-                                          hintText: "Password",
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 8),
-
-                                  InkWell(
-                                    onTap:(){
-
-                                      if(model.Signup()){
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupScreen(),));
-                                      }
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: 297,
-                                      height: 42,
-                                      decoration: BoxDecoration(gradient: primary),
-
+                                    Container(
+                                      alignment: Alignment.topRight,
+                                      child: TextButton(
+                                        onPressed: () {},
                                         child: Text(
-                                          "Signup",
+                                          "forgot Password?",
+                                          style: TextStyle(color: pinkColor),
+                                        ),
+                                      ),
+                                    ),
+                                
+                                    InkWell(
+                                      onTap: () async{
+                                        // if (_Globalloginkey.currentState!
+                                        //     .validate()) {
+                                
+                                
+                                        if(model.Login())
+                                
+                                          {
+                                            model.setState(ViewState.busy);
+                                            await Future.delayed(Duration(seconds: 5));
+                                            Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => RootScreen(),
+                                            ),
+                                          );
+                                            model.setState(ViewState.idle);
+                                        }
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: 297,
+                                        height: 42,
+                                        decoration: BoxDecoration(
+                                          gradient: primary,
+                                        ),
+                                        child:model.state==ViewState.busy ? CircularProgressIndicator():
+                                        Text(
+                                          "login",
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: whiteColor,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-
+                                      ),
                                     ),
-                                  ),
-
-
-                                  Container(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text("Already have an account? "),
-                                        TextButton(
-                                          onPressed: () {
-                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => login(),));
-                                          },
-                                          child: Text(
-                                            "Login",
-                                            style: TextStyle(color: pinkColor),
+                                    Container(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text("Don't have an account? "),
+                                          TextButton(
+                                            onPressed: () {
+                                              // Navigator.push(context, MaterialPageRoute(builder: (context) => signup(),),);
+                                            },
+                                            child: Text(
+                                              "Signup",
+                                              style: TextStyle(color: pinkColor),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Form(
+                              key: model.Globalsignupkey,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        width: 297,
+                                        height: 42,
+                                
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: whiteColor,
+                                              blurRadius: 8,
+                                              spreadRadius: 0,
+                                              offset: Offset(-2, 4),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                
+                                          validator: model.usernamevalidator,
+                                
+                                          // validator: (value){
+                                          //   if(value!.isEmpty || value == null){
+                                          //     return "please enter your username";
+                                          //   }
+                                          //   else{
+                                          //     return null;
+                                          //   }
+                                          // },
+                                          decoration: authInputDecoration,
+                                        ),
+                                      ),
+                                    ),
+                                
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        width: 297,
+                                        height: 42,
+                                
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: whiteColor,
+                                              blurRadius: 8,
+                                              spreadRadius: 0,
+                                              offset: Offset(-2, 4),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                
+                                          validator: model.emailvalidator,
+                                
+                                
+                                          // validator: (value ){
+                                          //   if(value!.isEmpty || value == null ){
+                                          //     return " please enter your email" ;
+                                          //   }
+                                          //   else{
+                                          //     return null ;
+                                          //   }
+                                          // },
+                                          decoration: authInputDecoration.copyWith(
+                                            hintText: "Email",
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        width: 297,
+                                        height: 42,
+                                
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.white,
+                                              blurRadius: 0,
+                                              spreadRadius: 0,
+                                              offset: Offset(-2, 4),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                          validator: model.passwordvalidator,
+                                
+                                
+                                          // validator: (value){
+                                          //   if(value!.isEmpty || value==null){
+                                          //     return "please enter your password";
+                                          //
+                                          //   }
+                                          //   else if (value!.length <= 7){
+                                          //     return "enter atleast 8 character";
+                                          //   }
+                                          //   else{
+                                          //     return null;
+                                          //   }
+                                          // },
+                                          decoration: authInputDecoration.copyWith(
+                                            hintText: "Password",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                
+                                    InkWell(
+                                      onTap:()async{
+                                
+                                        if(model.Signup())
+                                
+                                        {
+                                          model.setState(ViewState.busy);
+                                          await Future.delayed(Duration(seconds: 5));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupScreen(),));
+                                        model.setState(ViewState.idle);
+                                        }
+                                
+                                
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: 297,
+                                        height: 42,
+                                        decoration: BoxDecoration(gradient: primary),
+                                
+                                          child:model.state==ViewState.busy ? CircularProgressIndicator():
+                                          Text(
+                                            "Signup",
+                                            style: TextStyle(
+                                              color: whiteColor,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                
+                                      ),
+                                    ),
+                                
+                                
+                                    Container(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text("Already have an account? "),
+                                          TextButton(
+                                            onPressed: () {
+                                              // Navigator.push(context, MaterialPageRoute(builder: (context) => login(),));
+                                            },
+                                            child: Text(
+                                              "Login",
+                                              style: TextStyle(color: pinkColor),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
